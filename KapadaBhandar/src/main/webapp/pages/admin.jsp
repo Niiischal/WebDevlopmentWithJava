@@ -48,7 +48,7 @@
       <input type="text" class="box" name="productName" placeholder="enter the product name">
       <input type="text" class="box" name="productDescriptioon" placeholder="enter the product description">
       <input type="text" class="box" name="productPrice" placeholder="enter the product price">
-      <input type="text" class="box" name="productCategory" placeholder="enter the catogery id">     
+      <input type="text" class="box" name="productCategory" placeholder="enter the catogery ">     
       <input type="file" class="box" name="productImage"  accept="image/*">
       <input type="submit" value="Add product" class="btn">
    </form>

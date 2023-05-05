@@ -8,11 +8,11 @@ import javax.servlet.http.Part;
 
 public class PhotoUploader {
 	String uploadPath = "C:/Users/Acer/OneDrive - London Metropolitan University/Second Year/WebDevlopmentWithJava/KapadaBhandar/src/main/webapp/images";
-	String deletePath = "C:/Users/Acer/OneDrive - London Metropolitan University/Second Year/WebDevelopmentWithJava/KapadaBhandar/src/main/webapp/";
+	String deletePath = "C:/Users/Acer/OneDrive - London Metropolitan University/Second Year/WebDevlopmentWithJava/KapadaBhandar/src/main/webapp/";
 	public void uploadPhoto(Part filePart) {
      // Get the uploaded image file
         String fileName = getFileName(filePart);
-        String uploadPath = "C:/Users/Acer/OneDrive - London Metropolitan University/Second Year/WebDevelopmentWithJava/KapadaBhandar/src/main/webapp/images";        
+        String uploadPath = "C:/Users/Acer/OneDrive - London Metropolitan University/Second Year/WebDevlopmentWithJava/KapadaBhandar/src/main/webapp/images";        
         InputStream fileContent;
 		try {
 			fileContent = filePart.getInputStream();

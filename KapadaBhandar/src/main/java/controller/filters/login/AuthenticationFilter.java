@@ -58,6 +58,7 @@ private ServletContext context;
 			this.context.log("Requested Resource::" + uri);
 			chain.doFilter(request, response);
 		} else if (isAdminURI) {
+			if(session!=null) {
 			this.context.log("Requested Resource::" + uri);
 			String username = (String) session.getAttribute("user");
 			String password = (String) session.getAttribute("password");
@@ -69,6 +70,10 @@ private ServletContext context;
 
 			else {
 				res.sendRedirect(req.getContextPath() + "/login.jsp");
+			}
+		  }
+			else {
+				res.sendRedirect(req.getContentType()+ "/login.jsp");
 			}
 		} else if (!loggedIn) {
 			res.sendRedirect(req.getContextPath() + "/login.jsp");

@@ -53,7 +53,7 @@
 		  <a href="index.jsp" target="_blank">Home</a>
 		  <a href="">Search</a>
 		  <% if (mySession.checkUser(user)) { %>
-		  <a href="" target="_blank">View Cart</a>
+		  <a href="pages/cart.jsp" target="_blank">View Cart</a>
 		  <a href="pages/user.jsp" target="_blank">Profile</a>
 		  <% } %>
 		  <a href="" target="_blank">About Us</a>
@@ -89,8 +89,11 @@
 	          <img src="${product.productImage}" alt="Product Image">
 	          <h2>${product.productName}</h2>
           		<p>Price: ${product.productPrice}</p>
-          	<form>
+          	<form action = "<%= request.getContextPath() %>/AddToCart" method ="post" enctype = "multipart/form-data">
            	 	<input type="submit" value="Add to Cart" class="btn">
+           	 	<input type="hidden" name="productID" value="${product.productID}">
+           	 	<input type="hidden" name="productName" value="${product.productName}">
+           	 	<input type="hidden" name="productPrice" value="${product.productPrice}">
           	</form>
         </div>
       	</c:forEach>		

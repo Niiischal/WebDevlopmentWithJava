@@ -28,8 +28,8 @@
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>pages/nav.css"/>
-<link rel="stylesheet" href="<%= request.getContextPath() %>pages/user.css"/>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/nav.css"/>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/user.css"/>
 </head>
 <body>
 <sql:setDataSource var="dbconnection" driver="com.mysql.cj.jdbc.Driver"
@@ -116,4 +116,6 @@
       <img src="../${userData.image}" alt="User image"/>
     </div>
     </div>
+   </body>
+   </html>
   

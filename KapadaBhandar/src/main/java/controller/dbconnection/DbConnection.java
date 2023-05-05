@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import resource.MyConstants;
 import model.Product;
 import model.Customer;
+import model.Cart;
 import model.Encryption;
 
 
@@ -163,10 +164,10 @@ public class DbConnection {
 	}
 	
 		public int updateUser(String query, Customer registerModel, int userID) {
-			Connection dbConnection = getConnection();
+			Connection dbconnection = getConnection();
 			int result = 0;
 			try {
-				PreparedStatement st= dbConnection.prepareStatement(query);
+				PreparedStatement st= dbconnection.prepareStatement(query);
 				st.setString(1, registerModel.getfirstName());
 				st.setString(2, registerModel.getlastName());
 				st.setString(3, registerModel.getaddress());
@@ -184,6 +185,27 @@ public class DbConnection {
 				e.printStackTrace();
 				return result;
 			}
+		}
+
+		public int cart(String query, Cart cartModel) {
+			Connection dbconnection = getConnection();
+			int result = 0;
+			try {
+				PreparedStatement st= dbconnection.prepareStatement(query);
+				st.setString(1, cartModel.getproductID());
+				st.setString(2, cartModel.getusername());				
+				st.setString(3, cartModel.getproductName());
+				st.setString(4, cartModel.getproductPrice());
+				result = st.executeUpdate();
+				
+				return result;
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return result;
+			}
+			
 		}
 
 	
