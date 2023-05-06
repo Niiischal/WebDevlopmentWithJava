@@ -16,6 +16,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/nav.css">
    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin.css">
+   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/adminProductOrder.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -105,7 +106,36 @@
           </c:forEach>
        </table>
     </div>
- </div>                
+        <h1>Order Details</h1>
+        <div class="orderdetails">
+        	<sql:setDataSource var="dbconnection" driver="com.mysql.jdbc.Driver"
+					url="jdbc:mysql://localhost:3306/coursework" user="root"
+					password="" />
+			<sql:query var="orders" dataSource="${dbconnection}">
+          		SELECT orderID, productID,  username , productName, productPrice FROM orders;
+          	</sql:query>
+            <table class="order-display-table">
+                <thead>
+                  <tr>
+                    <th>order id</th>
+                    <th>product id</th>
+                    <th>username</th>              
+                    <th>product name</th>
+                    <th>price</th>
+                   </tr>
+                </thead>
+                <c:forEach var="order" items="${orders.rows}">
+                <tr>
+                    <td><c:out value="${order.orderID}"></c:out></td>
+                    <td><c:out value="${order.productID}"></c:out></td>
+                    <td><c:out value="${order.username}"></c:out></td>
+                    <td><c:out value="${order.productName}"></c:out></td>
+                    <td><c:out value="${order.productPrice}"></c:out></td>
+                </tr>
+                </c:forEach>
+            </table>
+        </div>
+        </div>               
 </main>
 </body>
 </html>

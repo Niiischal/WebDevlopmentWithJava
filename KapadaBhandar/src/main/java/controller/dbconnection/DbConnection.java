@@ -177,9 +177,7 @@ public class DbConnection {
 				st.setString(7, registerModel.getimagePath());
 				st.setInt(8,userID);
 				result = st.executeUpdate();
-				
 				return result;
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -187,7 +185,7 @@ public class DbConnection {
 			}
 		}
 
-		public int cart(String query, Cart cartModel) {
+		public int addCart(String query, Cart cartModel) {
 			Connection dbconnection = getConnection();
 			int result = 0;
 			try {
@@ -197,9 +195,7 @@ public class DbConnection {
 				st.setString(3, cartModel.getproductName());
 				st.setString(4, cartModel.getproductPrice());
 				result = st.executeUpdate();
-				
 				return result;
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

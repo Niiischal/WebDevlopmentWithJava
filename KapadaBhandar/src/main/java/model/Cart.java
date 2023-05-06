@@ -19,7 +19,14 @@ public class Cart {
 		return productID;
 	}
 
+	public void setusername(String username) {
+		this.username = username;
+	}
 
+	public String getusername() {
+		return username;
+	}
+	
 	public void setproductName(String productName) {
 		this.productName = productName;
 	}
@@ -36,13 +43,6 @@ public class Cart {
 		return productPrice;
 	}
 
-	public void setusername(String username) {
-		this.username = username;
-	}
-
-	public String getusername() {
-		return username;
-	}
 
 
 }

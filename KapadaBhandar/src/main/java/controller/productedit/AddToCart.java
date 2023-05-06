@@ -37,7 +37,7 @@ public class AddToCart extends HttpServlet {
 		String productPrice = request.getParameter("productPrice");
 		Cart cartModel = new Cart(productID, username, productName, productPrice);
 		DbConnection con = new DbConnection();
-		int result = con.cart(MyConstants.ADDTOCART, cartModel);
+		int result = con.addCart(MyConstants.ADDTOCART, cartModel);
 		if(result > 0) {
 			JOptionPane.showMessageDialog(null, "Product Added to Cart");
 			response.sendRedirect("pages/cart.jsp");
