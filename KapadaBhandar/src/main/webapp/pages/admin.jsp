@@ -36,12 +36,20 @@
           </div>
           
           <div class="nav-links">
-            <a href="../LogoutServlet">Logout</a>
+		  <form action= "../LogoutServlet" method = "post" style = "width:100%;">
+            <input type="submit" value="Logout" style = "width:100%;" class="btnn">
+          </form>
           </div>
         </div>
     </header>
     <main>
 <div class="container">
+	<%-- Check if the registerMessage attribute is set --%>
+	<% if (request.getAttribute("registerMessage") != null) { %>
+   		 <div class="alert alert-info">
+       		 <strong><%= request.getAttribute("registerMessage") %></strong>
+    	</div>
+	<% } %>
 <div class="admin-product-form-container">
    <form action="<%= request.getContextPath() %>/AddProducts" method="post" enctype="multipart/form-data">
       <h3 class="title">Add the product</h3>

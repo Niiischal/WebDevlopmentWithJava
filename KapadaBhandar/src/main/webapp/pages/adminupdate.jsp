@@ -27,7 +27,7 @@
           
           <div class="nav-links">
           <form action= "<%=request.getContextPath()%>/LogoutServlet" method = "post" style = "width:100%;">
-            <input type="submit" value="Logout" style = "width:100%;"/>
+            <input type="submit" value="Logout" style = "width:20%;" class="btnn">
           </form>
           </div>
         </div>

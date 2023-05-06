@@ -17,5 +17,5 @@ public class MyConstants{
     public static final String REGISTERUSER = "INSERT INTO registration (firstName,lastName,address,email,username,password,rePassword,image) VALUES (?,?,?,?,?,?,?,?)";
     public static final String UPDATEPRODUCT = "UPDATE product SET productName = ?, productDescriptioon = ?, productPrice = ?, productCategory = ?, productImage = ? WHERE productID= ?";
     public static final String DELETEPRODUCT = "DELETE FROM product WHERE productID = ?";
-	public static final String ADDTOCART = "INSERT INTO orders(productID, username,  productName, productPrice) VALUES(?,?,?,?)";
+	public static final String ADDTOCART = "INSERT INTO orders(productID, username,  productName, productPrice) VALUES (?,?,?,?)";
 }

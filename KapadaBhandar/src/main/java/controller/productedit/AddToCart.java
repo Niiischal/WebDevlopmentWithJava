@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import controller.dbconnection.DbConnection;
 import model.Cart;
@@ -31,16 +32,18 @@ public class AddToCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String productID = request.getParameter("productID");
-		String productName = request.getParameter("productName");
 		String username = request.getParameter("username");
+		String productName = request.getParameter("productName");
 		String productPrice = request.getParameter("productPrice");
 		Cart cartModel = new Cart(productID, username, productName, productPrice);
 		DbConnection con = new DbConnection();
 		int result = con.cart(MyConstants.ADDTOCART, cartModel);
 		if(result > 0) {
+			JOptionPane.showMessageDialog(null, "Product Added to Cart");
 			response.sendRedirect("pages/cart.jsp");
 		}
 		else {
+		    JOptionPane.showMessageDialog(null,"Product not Added to Cart","Alert",JOptionPane.ERROR_MESSAGE);
 			response.sendRedirect("index.jsp");
 		}
 	}

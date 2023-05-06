@@ -9,6 +9,33 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/login.css" >
 </head>
 <body>
+	      <div class="nav">
+          <input type="checkbox" id="nav-check">
+          <div class="nav-header">
+            <div class="nav-title">
+              Kapada Bhandar
+            </div>
+          </div>
+          <div class="nav-btn">
+            <label for="nav-check">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </div>
+          
+          <div class="nav-links">
+			 <a href= "index.jsp"> Home</a>
+          </div>
+        </div>
+    <% String errorMessage =(String) request.getAttribute("errorMessage"); %>
+	<%if (errorMessage!=null){ %>
+		<div id="error-message"><%=errorMessage %></div>
+	<%} %>
+	<% String registerMessage =(String) request.getAttribute("registerMessage"); %>
+	<%if (registerMessage!=null){ %>
+		<div id="error-message"><%=registerMessage %></div>
+	<%} %>
     <main>
     <div class="container">
 	<div class="loginform">

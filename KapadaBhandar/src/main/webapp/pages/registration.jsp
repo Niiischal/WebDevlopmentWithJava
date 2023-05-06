@@ -35,6 +35,10 @@
 	</header>
 	<main>
 	<div class="container">
+	<% String errorMessage =(String) request.getAttribute("errorMessage"); %>
+	<%if (errorMessage!=null){ %>
+		<div id="error-message"><%=errorMessage %></div>
+	<%} %>
 	<div class="registrationform">
    		<form action="<%= request.getContextPath() %>/Register" method="post" enctype="multipart/form-data">
       		<h3 class="title">Sign Up</h3>
