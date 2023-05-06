@@ -25,6 +25,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/search.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/nav.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -111,6 +112,17 @@
 			</c:forEach>		
 		</div>
 		</div>
+		  <div>
+	  <section class="footer">
+      <div class="social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-snapchat"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+      </div>
+      <p class="copyright">Kapada Bhandar @ 2023</p>
+    </section>
+	  </div>
 </body>
 </html>
 	 

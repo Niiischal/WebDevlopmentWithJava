@@ -109,7 +109,7 @@
         <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-facebook-f"></i></a>
       </div>
-      <p class="copyright">Kapada Bhandar @ 2021</p>
+      <p class="copyright">Kapada Bhandar @ 2023</p>
     </section>
 	  </div>
 	  

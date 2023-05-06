@@ -1,12 +1,12 @@
 
 .footer {
   padding: 40px 0;
-  background-color: rgb(192, 192, 192);
+  border: 1px solid black;
 }
 .footer .social {
   text-align: center;
   padding-bottom: 25px;
-  color: #4b4c4d;
+  color: #020202;
 }
 .footer .social a {
   font-size: 24px;
@@ -28,5 +28,5 @@
   margin-top: 15px;
   text-align: center;
   font-size: 13px;
-  color: #aaa;
+  color: black;
 }
