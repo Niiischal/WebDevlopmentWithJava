@@ -11,131 +11,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/nav.css">
-   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/admin.css">
-   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/adminProductOrder.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/nav.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/admin.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/adminProductOrder.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="nav">
-          <input type="checkbox" id="nav-check">
-          <div class="nav-header">
-            <div class="nav-title">
-              ADMIN PANEL
-            </div>
-          </div>
-          <div class="nav-btn">
-            <label for="nav-check">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-          </div>
-          
-          <div class="nav-links">
-		  <form action= "../LogoutServlet" method = "post" style = "width:100%;">
-            <input type="submit" value="Logout" style = "width:100%;" class="btnn">
-          </form>
-          </div>
-        </div>
-    </header>
-    <main>
-<div class="container">
-	<%-- Check if the registerMessage attribute is set --%>
-	<% if (request.getAttribute("registerMessage") != null) { %>
-   		 <div class="alert alert-info">
-       		 <strong><%= request.getAttribute("registerMessage") %></strong>
-    	</div>
-	<% } %>
-<div class="admin-product-form-container">
-   <form action="<%= request.getContextPath() %>/AddProducts" method="post" enctype="multipart/form-data">
-      <h3 class="title">Add the product</h3>
-      <input type="text" class="box" name="productName" placeholder="enter the product name">
-      <input type="text" class="box" name="productDescriptioon" placeholder="enter the product description">
-      <input type="text" class="box" name="productPrice" placeholder="enter the product price">
-      <input type="text" class="box" name="productCategory" placeholder="enter the catogery ">     
-      <input type="file" class="box" name="productImage"  accept="image/*">
-      <input type="submit" value="Add product" class="btn">
-   </form>
-</div>
-    <div class="product-display">
-        <!-- Database Connection using taglib directive -->
-        <sql:setDataSource var="dbconnection" driver="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/coursework" user="root" password="" />
-        <sql:query var="products" dataSource="${dbconnection}">
-    		SELECT productID, productName, productDescriptioon, productPrice, productCategory, productImage FROM product;
-    	</sql:query>
-       <table class="product-display-table">
-          <thead>
-          <tr>
-             <th>product id</th>
-             <th>product name</th>
-             <th>product description</th>
-             <th>product price</th>
-             <th>product category</th>
-             <th>action</th>
-          </tr>
-          </thead>
-          <c:forEach var="product" items="${products.rows}">          
-          <tr>
-            <td><c:out value="${product.productID}" /></td>
-            <td><c:out value="${product.productName}" /></td>
-            <td><c:out value="${product.productDescriptioon}" /></td>
-            <td><c:out value="${product.productPrice}" /></td>
-            <td><c:out value="${product.productCategory}" /></td>
-             <td>
-             	   <form action="<%= request.getContextPath() %>/pages/adminupdate.jsp">
-				      <input type="hidden" name="productID" value="${product.productID}" >
-				      <input type="hidden" name="productName" value="${product.productName}" >
-				      <input type="hidden" name="productDescriptioon" value="${product.productDescriptioon}" >
-				      <input type="hidden" name="productPrice" value="${product.productPrice}">
-				      <input type="hidden" name="productCategory" value="${product.productCategory}">
-				      <input type="hidden" name="productImage" value="${product.productImage}">				      
-				      <input type="submit" class="btn" value="Edit">       
-				   </form>
-					<form action="<%=request.getContextPath()%>/DeleteProduct" method="post">
-					<input type="hidden" name="productID" value="${product.productID}" >
-						<input type="submit" value="Delete" class="btn">
-					</form>
-             </td>
-          </tr>
-          </c:forEach>
-       </table>
-    </div>
-        <h1>Order Details</h1>
-        <div class="orderdetails">
-        	<sql:setDataSource var="dbconnection" driver="com.mysql.jdbc.Driver"
+	<header>
+		<div class="nav">
+			<input type="checkbox" id="nav-check">
+			<div class="nav-header">
+				<div class="nav-title">ADMIN PANEL</div>
+			</div>
+			<div class="nav-btn">
+				<label for="nav-check"> <span></span> <span></span> <span></span>
+				</label>
+			</div>
+
+			<div class="nav-links">
+				<form action="../LogoutServlet" method="post">
+					<input type="submit" value="Logout" class="btnn1">
+				</form>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="container">
+			<%-- Check if the registerMessage attribute is set --%>
+			<%
+			if (request.getAttribute("registerMessage") != null) {
+			%>
+			<div class="alert alert-info">
+				<strong><%=request.getAttribute("registerMessage")%></strong>
+			</div>
+			<%
+			}
+			%>
+			<div class="admin-product-form-container">
+				<form action="<%=request.getContextPath()%>/AddProducts"
+					method="post" enctype="multipart/form-data">
+					<h3 class="title">Add the product</h3>
+					<input type="text" class="box" name="productName"
+						placeholder="enter the product name"> <input type="text"
+						class="box" name="productDescriptioon"
+						placeholder="enter the product description"> <input
+						type="text" class="box" name="productPrice"
+						placeholder="enter the product price"> <input type="text"
+						class="box" name="productCategory"
+						placeholder="enter the catogery "> <input type="file"
+						class="box" name="productImage" accept="image/*"> <input
+						type="submit" value="Add product" class="btn">
+				</form>
+			</div>
+			<div class="product-display">
+				<!-- Database Connection using taglib directive -->
+				<sql:setDataSource var="dbconnection"
+					driver="com.mysql.cj.jdbc.Driver"
 					url="jdbc:mysql://localhost:3306/coursework" user="root"
 					password="" />
-			<sql:query var="orders" dataSource="${dbconnection}">
+				<sql:query var="products" dataSource="${dbconnection}">
+    		SELECT productID, productName, productDescriptioon, productPrice, productCategory, productImage FROM product;
+    	</sql:query>
+				<table class="product-display-table">
+					<thead>
+						<tr>
+							<th>product id</th>
+							<th>product name</th>
+							<th>product description</th>
+							<th>product price</th>
+							<th>product category</th>
+							<th>action</th>
+						</tr>
+					</thead>
+					<c:forEach var="product" items="${products.rows}">
+						<tr>
+							<td><c:out value="${product.productID}" /></td>
+							<td><c:out value="${product.productName}" /></td>
+							<td><c:out value="${product.productDescriptioon}" /></td>
+							<td><c:out value="${product.productPrice}" /></td>
+							<td><c:out value="${product.productCategory}" /></td>
+							<td>
+								<form
+									action="<%=request.getContextPath()%>/pages/adminupdate.jsp">
+									<input type="hidden" name="productID"
+										value="${product.productID}"> <input type="hidden"
+										name="productName" value="${product.productName}"> <input
+										type="hidden" name="productDescriptioon"
+										value="${product.productDescriptioon}"> <input
+										type="hidden" name="productPrice"
+										value="${product.productPrice}"> <input type="hidden"
+										name="productCategory" value="${product.productCategory}">
+									<input type="hidden" name="productImage"
+										value="${product.productImage}"> <input type="submit"
+										class="btn" value="Edit">
+								</form>
+								<form action="<%=request.getContextPath()%>/DeleteProduct"
+									method="post">
+									<input type="hidden" name="productID"
+										value="${product.productID}"> <input type="submit"
+										value="Delete" class="btn">
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<h1>Order Details</h1>
+			<div class="orderdetails">
+				<sql:setDataSource var="dbconnection" driver="com.mysql.jdbc.Driver"
+					url="jdbc:mysql://localhost:3306/coursework" user="root"
+					password="" />
+				<sql:query var="orders" dataSource="${dbconnection}">
           		SELECT orderID, productID,  username , productName, productPrice FROM orders;
           	</sql:query>
-            <table class="order-display-table">
-                <thead>
-                  <tr>
-                    <th>order id</th>
-                    <th>product id</th>
-                    <th>username</th>              
-                    <th>product name</th>
-                    <th>price</th>
-                   </tr>
-                </thead>
-                <c:forEach var="order" items="${orders.rows}">
-                <tr>
-                    <td><c:out value="${order.orderID}"></c:out></td>
-                    <td><c:out value="${order.productID}"></c:out></td>
-                    <td><c:out value="${order.username}"></c:out></td>
-                    <td><c:out value="${order.productName}"></c:out></td>
-                    <td><c:out value="${order.productPrice}"></c:out></td>
-                </tr>
-                </c:forEach>
-            </table>
-        </div>
-        </div>               
-</main>
+				<table class="order-display-table">
+					<thead>
+						<tr>
+							<th>order id</th>
+							<th>product id</th>
+							<th>username</th>
+							<th>product name</th>
+							<th>price</th>
+						</tr>
+					</thead>
+					<c:forEach var="order" items="${orders.rows}">
+						<tr>
+							<td><c:out value="${order.orderID}"></c:out></td>
+							<td><c:out value="${order.productID}"></c:out></td>
+							<td><c:out value="${order.username}"></c:out></td>
+							<td><c:out value="${order.productName}"></c:out></td>
+							<td><c:out value="${order.productPrice}"></c:out></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+	</main>
 </body>
 </html>

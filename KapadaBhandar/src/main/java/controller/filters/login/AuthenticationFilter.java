@@ -16,25 +16,24 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
-private ServletContext context;
+	private ServletContext context;
 
-@Override
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-	this.context = filterConfig.getServletContext();
-	this.context.log("AuthenticationFilter initialized");
-}
+		this.context = filterConfig.getServletContext();
+		this.context.log("AuthenticationFilter initialized");
+	}
 
-	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		
-		//check if the request is a login or logout request
-		String uri = req.getRequestURI ();
+
+		// check if the request is a login or logout request
+		String uri = req.getRequestURI();
 		System.out.println(uri);
-		
+
 		HttpSession session = req.getSession(false);
 		boolean loggedIn = session != null && session.getAttribute("user") != null;
 
@@ -42,6 +41,11 @@ private ServletContext context;
 		String registerURI = req.getContextPath() + "/pages/registration.jsp";
 		String adminURI = req.getContextPath() + "/pages/admin.jsp";
 		String indexURI = req.getContextPath() + "/index.jsp";
+		String searchURI = req.getContextPath() + "/pages/search.jsp";
+		String menURI = req.getContextPath() + "/pages/menSearch.jsp";
+		String womenURI = req.getContextPath() + "/pages/womenSearch.jsp";
+		String childURI = req.getContextPath() + "/pages/childrenSearch.jsp";
+		String priceURI = req.getContextPath() + "/pages/priceSort.jsp";
 
 		boolean isLoginURI = uri.equals(loginURI);
 		boolean isRegisterURI = uri.equals(registerURI);
@@ -52,28 +56,29 @@ private ServletContext context;
 		boolean isLogoutServlet = uri.endsWith("LogoutServlet");
 		boolean isRegisterServlet = uri.endsWith("Register");
 		boolean isImg = uri.endsWith(".jpg");
-
-		if (isLoginURI || isRegisterURI || isindexURI || isCSS || isLoginServlet || isLogoutServlet
-				|| isRegisterServlet || isImg) {
+		boolean isSearch = (uri.equals(searchURI)) || (uri.equals(menURI)) || (uri.equals(womenURI))
+				|| (uri.equals(priceURI)) || (uri.equals(childURI));
+		System.out.println(isSearch);
+		if (isLoginURI || isRegisterURI || isindexURI || isCSS || isLoginServlet || isLogoutServlet || isRegisterServlet
+				|| isImg || isSearch) {
 			this.context.log("Requested Resource::" + uri);
 			chain.doFilter(request, response);
 		} else if (isAdminURI) {
-			if(session!=null) {
-			this.context.log("Requested Resource::" + uri);
-			String username = (String) session.getAttribute("user");
-			String password = (String) session.getAttribute("password");
-			if (username != null && username.equals("admin") && password != null && password.equals("admin@123")) {
-				chain.doFilter(request, response);
-			} else if (username != null) {
-				res.sendRedirect(req.getContextPath() + "/index.jsp");
-			}
+			if (session != null) {
+				this.context.log("Requested Resource::" + uri);
+				String username = (String) session.getAttribute("user");
+				String password = (String) session.getAttribute("password");
+				if (username != null && username.equals("admin") && password != null && password.equals("admin@123")) {
+					chain.doFilter(request, response);
+				} else if (username != null) {
+					res.sendRedirect(req.getContextPath() + "/index.jsp");
+				}
 
-			else {
-				res.sendRedirect(req.getContextPath() + "/login.jsp");
-			}
-		  }
-			else {
-				res.sendRedirect(req.getContentType()+ "/login.jsp");
+				else {
+					res.sendRedirect(req.getContextPath() + "/login.jsp");
+				}
+			} else {
+				res.sendRedirect(req.getContentType() + "/login.jsp");
 			}
 		} else if (!loggedIn) {
 			res.sendRedirect(req.getContextPath() + "/login.jsp");
@@ -81,10 +86,11 @@ private ServletContext context;
 			chain.doFilter(request, response);
 		}
 	}
-@Override
-	public void destroy() {
-	// TODO Auto-generated method stub
 
-}
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

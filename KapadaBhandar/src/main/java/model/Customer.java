@@ -1,29 +1,27 @@
 package model;
 
 public class Customer {
-	
-	private String firstName, lastName, address, email, username, password, rePassword, imagePath;
 
-	public Customer (String firstName, String lastName, String address, String email, String username, String password, String rePassword, String imagePath){
+	private String firstName, lastName, address, email, username, password, imagePath;
+
+	public Customer(String firstName, String lastName, String address, String email, String username, String password,
+			String imagePath) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.rePassword = rePassword;
 		this.imagePath = imagePath;
 	}
-
 
 	public void setfirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	public String getfirstName() {
-	return firstName;
+		return firstName;
 	}
-
 
 	public void setlastName(String lastName) {
 		this.lastName = lastName;
@@ -63,14 +61,6 @@ public class Customer {
 
 	public String getpassword() {
 		return password;
-	}
-
-	public void setrePassword(String rePassword) {
-		this.rePassword = rePassword;
-	}
-
-	public String getrePassword() {
-		return rePassword;
 	}
 
 	public void setimagePath(String imagePath) {

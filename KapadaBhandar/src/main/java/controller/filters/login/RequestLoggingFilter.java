@@ -28,16 +28,17 @@ public class RequestLoggingFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		Enumeration<String> params = req.getParameterNames();
-		while(params.hasMoreElements()){
+		while (params.hasMoreElements()) {
 			String name = params.nextElement();
 			String value = request.getParameter(name);
-			this.context.log(req.getRemoteAddr() + "::Request Params::{"+name+"="+value+"}");
+			this.context.log(req.getRemoteAddr() + "::Request Params::{" + name + "=" + value + "}");
 		}
 
 		Cookie[] cookies = req.getCookies();
-		if(cookies != null){
-			for(Cookie cookie : cookies){
-				this.context.log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				this.context
+						.log(req.getRemoteAddr() + "::Cookie::{" + cookie.getName() + "," + cookie.getValue() + "}");
 			}
 		}
 		// pass the request along the filter chain

@@ -12,35 +12,34 @@ import model.Customer;
 import model.Cart;
 import model.Encryption;
 
-
 public class DbConnection {
 	public Connection getConnection() {
-		try{
+		try {
 			Class.forName(MyConstants.DRIVERNAME);
-			Connection connection = DriverManager.getConnection(MyConstants.DATABASEURL,MyConstants.DATABASEUSERNAME,MyConstants.DATABASEUSERPASSWORD);
+			Connection connection = DriverManager.getConnection(MyConstants.DATABASEURL, MyConstants.DATABASEUSERNAME,
+					MyConstants.DATABASEUSERPASSWORD);
 			return connection;
-		}catch(SQLException | ClassNotFoundException ex) {
+		} catch (SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 			return null;
 		}
-	
-	}
 
+	}
 
 	public Boolean UserRegistered(String query, String username, String password) {
 		Connection dbconnection = getConnection();
-		if(dbconnection != null) {
+		if (dbconnection != null) {
 			try {
-				//Get the user name provided by the user
+				// Get the user name provided by the user
 				PreparedStatement userStatement = dbconnection.prepareStatement(MyConstants.GETUSERNAME);
 				userStatement.setString(1, username);
 				ResultSet userResult = userStatement.executeQuery();
-				if(userResult.next()) {
-					//if the user exists...
+				if (userResult.next()) {
+					// if the user exists...
 					PreparedStatement passwordStatement = dbconnection.prepareStatement(MyConstants.GETPASSWORD);
-					passwordStatement.setString(1,username);
+					passwordStatement.setString(1, username);
 					ResultSet passwordResult = passwordStatement.executeQuery();
-					if(passwordResult.next()) {
+					if (passwordResult.next()) {
 						String encryptedPassword = passwordResult.getString("password");
 						String decryptedPassword = Encryption.decrypt(encryptedPassword);
 						System.out.println(encryptedPassword);
@@ -49,22 +48,22 @@ public class DbConnection {
 						boolean out = checkPassword(decryptedPassword, password);
 						System.out.println(out);
 						return out;
-					}else return false;
-				}
-				else {
+					} else
+						return false;
+				} else {
 					return false;
 				}
-				
-			} catch(SQLException e){ 
+
+			} catch (SQLException e) {
 				return null;
 			}
-		}
-		else return null; 
+		} else
+			return null;
 	}
-	
+
 	public ResultSet selectAllQuery(String query) {
 		Connection dbconnection = getConnection();
-		if(dbconnection != null) {
+		if (dbconnection != null) {
 			try {
 				PreparedStatement statement = dbconnection.prepareStatement(query);
 				ResultSet result = statement.executeQuery();
@@ -72,34 +71,35 @@ public class DbConnection {
 			} catch (SQLException e) {
 				return null;
 			}
-		}else {
+		} else {
 			return null;
 		}
 	}
 
 	private boolean checkPassword(String decryptedPassword, String password) {
 		// TODO Auto-generated method stub
-		if(decryptedPassword.equals(password)) return true;
-		else return false;
+		if (decryptedPassword.equals(password))
+			return true;
+		else
+			return false;
 	}
 
 	public int registerUser(String query, Customer registerModel) {
 		Connection dbconnection = getConnection();
 		int result = 0;
 		try {
-			PreparedStatement st= dbconnection.prepareStatement(query);
+			PreparedStatement st = dbconnection.prepareStatement(query);
 			st.setString(1, registerModel.getfirstName());
 			st.setString(2, registerModel.getlastName());
 			st.setString(3, registerModel.getaddress());
 			st.setString(4, registerModel.getemail());
 			st.setString(5, registerModel.getusername());
-			st.setString(6, Encryption.encrypt(registerModel.getpassword()) );
-			st.setString(7, Encryption.encrypt(registerModel.getrePassword()) );		
-			st.setString(8, registerModel.getimagePath());
+			st.setString(6, Encryption.encrypt(registerModel.getpassword()));
+			st.setString(7, registerModel.getimagePath());
 			result = st.executeUpdate();
-			
+
 			return result;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,7 +111,7 @@ public class DbConnection {
 		Connection dbconnection = getConnection();
 		int result = 0;
 		try {
-			PreparedStatement st= dbconnection.prepareStatement(query);
+			PreparedStatement st = dbconnection.prepareStatement(query);
 			st.setString(1, productModel.getproductName());
 			st.setString(2, productModel.getproductDescriptioon());
 			st.setString(3, productModel.getproductPrice());
@@ -119,19 +119,19 @@ public class DbConnection {
 			st.setString(5, productModel.getproductImage());
 			result = st.executeUpdate();
 			return result;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return result;
 		}
 	}
-	
+
 	public int updateProduct(String query, Product productModel, int productID) {
 		Connection dbconnection = getConnection();
 		int result = 0;
 		try {
-			PreparedStatement st= dbconnection.prepareStatement(query);
+			PreparedStatement st = dbconnection.prepareStatement(query);
 			st.setString(1, productModel.getproductName());
 			st.setString(2, productModel.getproductDescriptioon());
 			st.setString(3, productModel.getproductPrice());
@@ -140,69 +140,67 @@ public class DbConnection {
 			st.setInt(6, productID);
 			result = st.executeUpdate();
 			return result;
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return result;
 		}
 	}
-		
-		public int removeProduct(String query, String productID) {
-			Connection dbconnection = getConnection();
-			int result = 0;
-			try {
-				PreparedStatement st = dbconnection.prepareStatement(query);
-				st.setString(1, productID);
-				result = st.executeUpdate();
-				return result;
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-				return result;
-			}
+
+	public int removeProduct(String query, String productID) {
+		Connection dbconnection = getConnection();
+		int result = 0;
+		try {
+			PreparedStatement st = dbconnection.prepareStatement(query);
+			st.setString(1, productID);
+			result = st.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return result;
+		}
 	}
-	
-		public int updateUser(String query, Customer registerModel, int userID) {
-			Connection dbconnection = getConnection();
-			int result = 0;
-			try {
-				PreparedStatement st= dbconnection.prepareStatement(query);
-				st.setString(1, registerModel.getfirstName());
-				st.setString(2, registerModel.getlastName());
-				st.setString(3, registerModel.getaddress());
-				st.setString(4, registerModel.getemail());
-				st.setString(5, registerModel.getusername());
-				st.setString(6, Encryption.encrypt(registerModel.getpassword()) );
-				st.setString(7, registerModel.getimagePath());
-				st.setInt(8,userID);
-				result = st.executeUpdate();
-				return result;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return result;
-			}
+
+	public int updateUser(String query, Customer registerModel, int userID) {
+		Connection dbconnection = getConnection();
+		int result = 0;
+		try {
+			PreparedStatement st = dbconnection.prepareStatement(query);
+			st.setString(1, registerModel.getfirstName());
+			st.setString(2, registerModel.getlastName());
+			st.setString(3, registerModel.getaddress());
+			st.setString(4, registerModel.getemail());
+			st.setString(5, registerModel.getusername());
+			st.setString(6, Encryption.encrypt(registerModel.getpassword()));
+			st.setString(7, registerModel.getimagePath());
+			st.setInt(8, userID);
+			result = st.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return result;
+		}
+	}
+
+	public int addCart(String query, Cart cartModel) {
+		Connection dbconnection = getConnection();
+		int result = 0;
+		try {
+			PreparedStatement st = dbconnection.prepareStatement(query);
+			st.setString(1, cartModel.getproductID());
+			st.setString(2, cartModel.getusername());
+			st.setString(3, cartModel.getproductName());
+			st.setString(4, cartModel.getproductPrice());
+			result = st.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return result;
 		}
 
-		public int addCart(String query, Cart cartModel) {
-			Connection dbconnection = getConnection();
-			int result = 0;
-			try {
-				PreparedStatement st= dbconnection.prepareStatement(query);
-				st.setString(1, cartModel.getproductID());
-				st.setString(2, cartModel.getusername());				
-				st.setString(3, cartModel.getproductName());
-				st.setString(4, cartModel.getproductPrice());
-				result = st.executeUpdate();
-				return result;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return result;
-			}
-			
-		}
+	}
 
-	
 }

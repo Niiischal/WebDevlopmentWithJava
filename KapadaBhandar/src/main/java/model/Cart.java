@@ -2,13 +2,13 @@ package model;
 
 public class Cart {
 	private String productID, username, productName, productPrice;
-	
+
 	public Cart(String productID, String username, String productName, String productPrice) {
 		this.productID = productID;
 		this.username = username;
 		this.productName = productName;
 		this.productPrice = productPrice;
-		
+
 	}
 
 	public void setproductID(String productID) {
@@ -26,7 +26,7 @@ public class Cart {
 	public String getusername() {
 		return username;
 	}
-	
+
 	public void setproductName(String productName) {
 		this.productName = productName;
 	}
@@ -42,7 +42,5 @@ public class Cart {
 	public String getproductPrice() {
 		return productPrice;
 	}
-
-
 
 }
