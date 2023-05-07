@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/register.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/nav.css">
 </head>
 <body>
 	<header>

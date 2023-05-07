@@ -44,7 +44,7 @@ public class UpdateUser extends HttpServlet {
 		String email = request.getParameter("email");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Part Image = request.getPart("ProfilePhoto");
+		Part Image = request.getPart("image");
 		String oldImage = request.getParameter("oldImage");
 		String imagePath = oldImage;
 		if (Image != null) {
