@@ -43,7 +43,7 @@ String user = (String) session.getAttribute("user");
 	<div class="nav">
 		<input type="checkbox" id="nav-check" />
 		<div class="nav-header">
-			<div class="nav-title">LUGA PASAL</div>
+			<div class="nav-title">Kapada Bhandar</div>
 		</div>
 		<div class="nav-btn">
 			<label for="nav-check"> <span></span> <span></span> <span></span>

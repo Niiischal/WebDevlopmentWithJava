@@ -15,7 +15,7 @@
 		<div class="nav">
 			<input type="checkbox" id="nav-check">
 			<div class="nav-header">
-				<div class="nav-title">JoGeek</div>
+				<div class="nav-title">Kapada Bhandar</div>
 			</div>
 			<div class="nav-btn">
 				<label for="nav-check"> <span></span> <span></span> <span></span>
@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="nav-links">
-				<a href="../index.jsp" target="_blank">Home</a>
+				<a href="../index.jsp" target="_blank">Home</a> 
 			</div>
 		</div>
 	</header>
